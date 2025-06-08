@@ -1,0 +1,14 @@
+*~
+*.o
+*.elf
+*.hex
+*.bin
+*.size
+*.log
+.*.sw[ponm]
+.sw[ponm]
+*.vim
+*.dylib
+*.so
+.DS_Store
+firefly_test

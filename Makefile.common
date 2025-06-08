@@ -1,0 +1,39 @@
+MAKE = make
+CC   = gcc
+CXX  = g++
+
+UNAME=$(shell uname)
+
+ifeq ($(UNAME),Darwin)
+	ARCH=$(shell arch)
+	ifeq ($(ARCH),arm64)
+		PKGCONFIG = /opt/homebrew/bin/pkg-config
+	else
+		PKGCONFIG = /usr/local/bin/pkg-config
+	endif
+	CC      = gcc
+	CXX     = g++
+	LIBEXT  = dylib
+	LDFLAGS = -lpthread
+	CFLAGS  = -g -ggdb -Wall -O3 -D_THREAD_SAFE -std=c2x
+	CFLAGS += -D_BSD_SOURCE -ferror-limit=5
+	CFLAGS += $(shell $(PKGCONFIG) --cflags sdl2)
+	CFLAGS += -I$(TOPDIR)
+	CXXFLAGS := $(CFLAGS)
+#CFLAGS += -Wno-deprecated -Wconversion -Werror -Wno-unused-function
+
+else
+	PKGCONFIG = $(shell which pkg-config)
+	CC      = gcc
+	CXX     = g++
+	LIBEXT  = so
+	LDFLAGS = -lm -lpthread
+	CFLAGS  = -g -ggdb -Wall -O3 -D_THREAD_SAFE -std=c2x
+	CFLAGS += -D_XOPEN_SOURCE=500 -fmax-errors=5
+	CFLAGS += $(shell $(PKGCONFIG) --cflags sdl2)
+	CFLAGS += -I$(TOPDIR)
+	CXXFLAGS := $(CFLAGS)
+	CFLAGS += -Wno-deprecated -Wconversion -Werror -Wno-unused-function
+
+endif
+
