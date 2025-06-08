@@ -15,6 +15,9 @@ TARGET = firefly_test
 
 all:$(TARGET)
 
+test: firefly_test
+	./firefly_test
+
 $(TARGET): firefly_test.o $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
