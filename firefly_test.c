@@ -15,7 +15,7 @@ double minimise_this_function (double *coords)
     //double z = 1 + (x+2)*(x+2) + (y+3)*(y+3);
 
     // this function has lots of local minima with its global minimum near x≈−6.1353,y≈−6.1887,
-    // For of this function, see https://www.desmos.com/3d/xlwstpxucm
+    // For a plot of this function, see https://www.desmos.com/3d/xlwstpxucm
     double z = pow (sin(x)+0.35*x+2, 2) + pow (sin(y) + 0.5*y+3, 2);
     return z;
 }
